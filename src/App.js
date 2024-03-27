@@ -4,6 +4,8 @@ import { useFormik } from "formik";
 import { userSchema } from './validation/userSchema';
 import  cardFront from './assets/images/bg-card-front.png';
 import  cardBack from './assets/images/bg-card-back.png';
+import  cardLogo from './assets/images/card-logo.svg';
+
 
 
 const state = {
@@ -27,10 +29,10 @@ function App() {
   const formik = useFormik({
     initialValues: {
       cardnumber: "",
-      name: "",
-      expiresm: "",
-      expiresy: "",
-      cvc: ""
+      name: "Jane Appleseed",
+      expiresm: "0",
+      expiresy: "0",
+      cvc: "000"
     },
 
     validationSchema: userSchema,
@@ -44,14 +46,51 @@ function App() {
   };
 
   const formatCardNumber = (value) => {
-    return value.replace(/\s/g, '').replace(/(.{4})/g, '$1 ');
+    const sanitizedValue = value.replace(/\D/g, '');
+
+    let formattedValue = '';
+    for (let i = 0; i < sanitizedValue.length; i++) {
+      if (i > 0 && i % 4 === 0) {
+        formattedValue += ' ';
+      }
+      formattedValue += sanitizedValue[i];
+    }
+    
+    console.log(formik.values.cardnumber)
+    return formattedValue;
   };
+
+  const formatCardNumber2 = (value) => {
+
+    if (value.length > 19) {
+      value = value.slice(0, 19);
+    }
+    return value;
+  };
+
 
   return (
     <div className="app">
       <div className="cards">
-        <div className='card-1'><img alt="card-front" src={cardFront}/></div>
-        <div className='card-2'><img alt="card-back" src={cardBack}/></div>
+
+        <div className='card-upper'>
+          <div className='card-1'>
+            <img src={cardLogo} alt='card-logo'/>
+            <div className='card-upper-content'>
+              <p className='card-number'>{formatCardNumber2(formatCardNumber(formik.values.cardnumber)) || "0000 0000 0000 0000"}</p>
+              <div className='card-upper-info'>
+                <p>{formik.values.name.toUpperCase()}</p>
+                <p>{(formik.values.expiresm.length < 2 && ("0" + formik.values.expiresm)) || formik.values.expiresm}  /{formik.values.expiresy}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div className='card-lower'>
+          <div className='card-2'></div>
+        </div>
+
       </div>
 
       <form onSubmit={formik.handleSubmit}>

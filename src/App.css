@@ -9,6 +9,17 @@ body {
   padding: 0;
 }
 
+::placeholder {
+  color: hsl(264, 5%, 80%);
+  font-weight: 500;
+  font-family: "Space Grotesk", sans-serif;
+
+}
+
+p {
+  margin: 0;
+}
+
 .app {
   background-color: white;
   background: url("./assets/images/bg-main-desktop.png");
@@ -26,13 +37,13 @@ body {
 
 .cards {
   /* background-color: aqua; */
-  width: 50%;
+  width: 60%;
 }
 
 form {
   /* background-color: aqua; */
 
-  width: 50%;
+  width: 40%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,18 +55,65 @@ form {
   display: flex;
 }
 
-.card-1 {
+.card-upper {
+  display: flex;
   justify-content: start;
-  margin-bottom: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.card-lower {
+  display: flex;
+  justify-content: end;
+}
+
+.card-1 {
+  background: url("./assets/images/bg-card-front.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 230px;
+  width: 400px;
+
+  padding: 2rem;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-1 > img {
+  height: 40px;
+  width: 70px;
+}
+
+
+.card-upper-content {
+  color: white;
+}
+
+.card-upper-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-top: 1rem;
+  letter-spacing: 2px;
+}
+
+.card-number {
+  /* text-align: center; */
+  font-size: 23px;
+  letter-spacing: 4.2px;
 }
 
 .card-2 {
+  background: url("./assets/images/bg-card-back.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 230px;
+  width: 400px;
   justify-content: end;
 }
 
 .form-exp-cvv {
-  /* justify-content: center;
-  align-items: center; */
+  margin-top: 1.75rem;
 }
 
 .form-exp-cvv-field-1-inputs {
@@ -69,7 +127,11 @@ form {
 }
 
 label {
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 1px;
   text-transform: uppercase;
+  margin-top: 1.75rem;
 }
 
 input {
@@ -78,6 +140,7 @@ input {
   padding: 1rem;
   box-sizing: border-box;
   width: 100%;
+  margin-top: 0.25rem;
 }
 
 .form-exp-cvv-field-1, .form-exp-cvv-field-2  {
@@ -95,4 +158,13 @@ input {
 .form-exp-cvv-inputs-1,.form-exp-cvv-inputs-2  {
   width: 50%;
   margin-right: 0.5rem ;
+}
+
+button {
+  border: none;
+  background-color: hsl(278, 68%, 11%);
+  border-radius: 10px;
+  color: white;
+  padding: 1rem 2rem;
+  margin: 1.75rem 0;
 }

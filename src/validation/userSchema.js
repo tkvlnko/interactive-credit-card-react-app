@@ -4,8 +4,8 @@ import * as yup from 'yup'
 
 export const userSchema = yup.object().shape({
     cardnumber: yup.string()
-    .matches(/^\d{16}$/, 'Wrong format')
-    .required(),
+    .matches(/^\d{4} \d{4} \d{4} \d{4}$/, 'Wrong format')
+    .required("Please enter your card number"),
 
     name: yup.string().min(1).max(20).required("Please enter your name"),
 
@@ -19,5 +19,5 @@ export const userSchema = yup.object().shape({
     .min(1, "Wtf bro try again")
     .required("Enter that number bro"),
     
-    cvc: yup.string().matches(/^\d{3}$/, 'Cmon 3 digits is it so hard').required(),
+    cvc: yup.string().matches(/^\d{3}$/, 'Cmon 3 digits is it so hard').required("Can not be empty"),
 })

@@ -110,6 +110,12 @@ form {
   height: 230px;
   width: 400px;
   justify-content: end;
+
+  box-sizing: border-box;
+  padding: 6.5rem 3rem;
+  letter-spacing: 2px;
+  color: white;
+  font-weight: 600;
 }
 
 .form-exp-cvv {
@@ -163,8 +169,40 @@ input {
 button {
   border: none;
   background-color: hsl(278, 68%, 11%);
-  border-radius: 10px;
+  border-radius: 8px;
   color: white;
   padding: 1rem 2rem;
   margin: 1.75rem 0;
+}
+
+.complete {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 3rem 6rem;
+}
+
+.complete > img {
+  height: 80px;
+  width: 80px;
+}
+
+.complete button {
+  width: 80%;
+}
+
+.complete p {
+  color: hsl(0, 0%, 44%);
+}
+
+h1 {
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+@media screen and (max-width: 900px) {
+  
 }

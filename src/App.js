@@ -2,9 +2,8 @@ import './App.css';
 import React, { useState } from 'react';
 import { useFormik } from "formik";
 import { userSchema } from './validation/userSchema';
-import  cardFront from './assets/images/bg-card-front.png';
-import  cardBack from './assets/images/bg-card-back.png';
 import  cardLogo from './assets/images/card-logo.svg';
+import  complete from './assets/images/icon-complete.svg';
 
 
 
@@ -16,15 +15,17 @@ const state = {
     cvc: ""
 };
 
-const onSubmit = (values, actions) => {
-  console.log(values)
-  // email = values.email;
-  actions.resetForm();
-}
-
-
 
 function App() {
+
+  const [submittedForm, setSubmittedForm] = useState(false);
+
+  const onSubmit = (values, actions) => {
+    console.log(values)
+    // email = values.email;
+    setSubmittedForm(!submittedForm);
+    actions.resetForm();
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -39,6 +40,7 @@ function App() {
     onSubmit,
   })
 
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     console.log(value);
@@ -68,6 +70,21 @@ function App() {
     return value;
   };
 
+  const truncate = (value, type) => {
+
+    switch (type) {
+      case "cvc":
+        return value.slice(0, 3);
+      case "name":
+        return value.slice(0, 20);
+      case "card":
+        return value.slice(0, 19);
+      case "date":
+        return value.slice (0, 2);
+      default:
+        return value;
+    }
+}
 
   return (
     <div className="app">
@@ -77,22 +94,25 @@ function App() {
           <div className='card-1'>
             <img src={cardLogo} alt='card-logo'/>
             <div className='card-upper-content'>
-              <p className='card-number'>{formatCardNumber2(formatCardNumber(formik.values.cardnumber)) || "0000 0000 0000 0000"}</p>
+              <p className='card-number'>{truncate(formatCardNumber(formik.values.cardnumber), "card") || "0000 0000 0000 0000"}</p>
               <div className='card-upper-info'>
-                <p>{formik.values.name.toUpperCase()}</p>
-                <p>{(formik.values.expiresm.length < 2 && ("0" + formik.values.expiresm)) || formik.values.expiresm}  /{formik.values.expiresy}</p>
+                <p>{truncate(formik.values.name.toUpperCase(), "name")}</p>
+                <p>{(formik.values.expiresm.length < 2 && ("0" + formik.values.expiresm)) || truncate(formik.values.expiresm, "date")} 
+                / {(formik.values.expiresy.length < 2 && ("0" + formik.values.expiresy)) || truncate(formik.values.expiresy, "date")}</p>
               </div>
             </div>
           </div>
         </div>
 
 
-        <div className='card-lower'>
-          <div className='card-2'></div>
+        <div className='card-lower'>f
+          <div className='card-2'>
+            <p>{truncate(formik.values.cvc, "cvc")}</p>
+          </div>
         </div>
 
       </div>
-
+    {!submittedForm && 
       <form onSubmit={formik.handleSubmit}>
         <label htmlFor='name'><p>Cardholder Name</p></label>
         <input type='text'
@@ -159,6 +179,15 @@ function App() {
         <button type='submit' disabled={formik.isSubmitting}>Confirm</button>
 
       </form>
+      }
+
+      { submittedForm && 
+      <div className='complete'>
+        <img src={complete} alt='complete-icon'/>
+        <h1>Thank you!</h1>
+        <p>We've added your card details</p>
+        <button onClick={() => setSubmittedForm(!submittedForm)}>Continue</button>
+        </div>}
     </div>
   );
 }

@@ -105,7 +105,7 @@ function App() {
         </div>
 
 
-        <div className='card-lower'>f
+        <div className='card-lower'>
           <div className='card-2'>
             <p>{truncate(formik.values.cvc, "cvc")}</p>
           </div>

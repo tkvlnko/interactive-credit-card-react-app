@@ -24,7 +24,9 @@ p {
   background-color: white;
   background: url("./assets/images/bg-main-desktop.png");
   background-repeat: no-repeat;
+  background-size: 30vw 100vh;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 
@@ -36,19 +38,17 @@ p {
 }
 
 .cards {
-  /* background-color: aqua; */
   width: 60%;
+  max-width: 600px;
 }
 
 form {
-  /* background-color: aqua; */
-
   width: 40%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 3rem 6rem;
-  /* align-items: center; */
+  max-width: 600px;
 }
 
 .card-1, .card-2, .form-exp-cvv {
@@ -147,6 +147,11 @@ input {
   box-sizing: border-box;
   width: 100%;
   margin-top: 0.25rem;
+  transition: 0.3s ease;
+}
+
+input:focus {
+  border-color: hsl(278, 68%, 11%);
 }
 
 .form-exp-cvv-field-1, .form-exp-cvv-field-2  {
@@ -173,6 +178,13 @@ button {
   color: white;
   padding: 1rem 2rem;
   margin: 1.75rem 0;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background-color: hsl(277, 55%, 26%);
+  filter: drop-shadow(0px 6px 6px #f1c4f7);
+
 }
 
 .complete {
@@ -203,6 +215,106 @@ h1 {
   letter-spacing: 2px;
 }
 
-@media screen and (max-width: 900px) {
-  
+@media screen and (max-width: 1200px) {
+  .app {
+    padding: 6rem 6rem; 
+  }
+}
+
+
+@media screen and (max-width: 1100px) {
+  .app {
+    padding: 6rem 4rem; 
+  }
+  form {
+    padding: 3rem 3rem;
+  }
+}
+
+
+@media screen and (max-width: 930px) {
+  .app {
+    flex-direction: column; 
+    width: 100%;
+    color: white;
+  }
+
+  .cards, form {
+    width: 100%;
+  }
+
+  .cards {
+    position: relative;
+    height: 230px;
+  }
+
+  .card-upper{
+    position: absolute;
+    z-index: 100;
+    bottom: -60px;
+  }
+
+}
+
+
+@media screen and (max-width: 820px) {
+  .app {
+    background: url("./assets/images/bg-main-mobile.png");
+    background-repeat: no-repeat;
+    background-size: 100vw 30vh; 
+    color: rgb(16, 16, 16);
+  }
+
+  .card-upper{
+    bottom: -150px;
+  }
+
+  .cards {
+    margin-bottom: 5rem;
+  }
+}
+
+
+
+@media screen and (max-width: 580px) {
+  .app {
+    padding: 3rem 2rem; 
+  }
+
+  .card-1, .card-2 {
+    width: 290px;
+    height: 180px;
+  }
+
+  .card-upper{
+    bottom: -100px;
+  }
+  .card-2 {
+    padding: 5rem 2.25rem;
+  }
+
+  .card-1 p, .card-2 p{
+    font-size: 14px;
+    letter-spacing: 3px;
+  }
+
+  .card-1 {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .card-1 img {
+    height: 20px;
+    width: 38px;
+  }
+
+  .card-upper-info p {
+    font-size: 10px;
+  }
+
+  .complete {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+    margin: 4rem;
+  }
 }
